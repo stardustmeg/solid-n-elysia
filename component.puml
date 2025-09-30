@@ -1,0 +1,56 @@
+@startuml
+skinparam componentStyle rectangle
+
+actor Hunter
+actor Transporter
+actor Dealer
+actor Admin
+
+package "Frontend" {
+  [SPA] <<Browser>>
+}
+
+package "Cloudflare Workers (API Layer)" {
+  [Auth API]
+  [Request API]
+  [Notification API]
+  [Statistics API]
+  [Payment API]
+}
+
+package "Cloudflare Services" {
+  database "D1 (SQL)" as D1
+  [KV Storage]
+  [R2 Storage (Files)]
+  queue "Queues (Async jobs)" as Q
+}
+
+package "External Integrations" {
+  [Payment Gateway]
+  [Email/SMS Provider]
+}
+
+Hunter --> [SPA]
+Transporter --> [SPA]
+Dealer --> [SPA]
+Admin --> [SPA]
+
+[SPA] --> [Auth API]
+[SPA] --> [Request API]
+[SPA] --> [Notification API]
+[SPA] --> [Statistics API]
+[SPA] --> [Payment API]
+
+[Auth API] --> D1
+[Request API] --> D1
+[Request API] --> [KV Storage]
+[Notification API] --> Q
+[Statistics API] --> D1
+[Payment API] --> D1
+
+Q --> [Notification API]
+[Notification API] --> [Email/SMS Provider]
+[Payment API] --> [Payment Gateway]
+
+[Request API] --> [R2 Storage (Files)]
+@enduml

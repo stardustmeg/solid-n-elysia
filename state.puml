@@ -1,0 +1,21 @@
+@startuml
+state "Заявка" as Request {
+  [*] --> Pending : Создана
+
+  Pending --> On_its_way : Принята водителем
+  Pending --> Canceled : Отказ / отмена
+
+  On_its_way --> Being_delivered_to_warehouse : Приёмка подтверждена
+  On_its_way --> Canceled : Отмена / сбой
+
+  Being_delivered_to_warehouse --> Completed : Доставлено на базу
+
+  Completed --> Graded : Дилер выставил грейд
+  Completed --> Canceled : Ошибка / спорная ситуация
+
+  Graded --> Paid : Выплата произведена
+
+  Paid --> [*]
+  Canceled --> [*]
+}
+@enduml

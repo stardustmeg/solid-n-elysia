@@ -1,0 +1,46 @@
+@startuml
+actor Hunter
+actor Transporter
+actor Dealer
+actor Admin
+participant "Web App" as App
+participant "DB" as DB
+
+== Создание заявки ==
+Hunter -> App: Создать заявку
+App -> DB: Сохранить (статус = В ожидании)
+App --> Hunter: Подтверждение
+
+== Принятие заявки ==
+Transporter -> App: Просмотр активных заявок
+App -> DB: Запрос заявок
+App --> Transporter: Список
+Transporter -> App: Принять заявку
+App -> DB: Статус = В пути
+App --> Hunter: Уведомление "Водитель назначен"
+
+== Выполнение ==
+Transporter -> App: Подтверждение приёмки (фото договора)
+App -> DB: Присвоение индекса
+App --> Transporter: Статус = Доставляется на базу
+Transporter -> App: Завершить доставку (фото сумок)
+App -> DB: Статус = Завершена
+App --> Hunter: Уведомление "Завершена"
+
+== Оценка дилером ==
+Dealer -> App: Просмотр завершённых
+App -> DB: Запрос заявок
+App --> Dealer: Список
+Dealer -> App: Выставить грейд + премию
+App -> DB: Статус = Оценена
+App --> Hunter: Уведомление (грейд, премия)
+App --> Transporter: Уведомление (завершение)
+
+== Выплаты и контроль ==
+Admin -> App: Просмотр отчётности
+App -> DB: Запрос статистики
+App --> Admin: Данные
+App -> DB: Выплаты
+App --> Hunter: Выплата
+App --> Transporter: Выплата
+@enduml

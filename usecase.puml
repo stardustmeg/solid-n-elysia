@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor Hunter
+actor Transporter
+actor Dealer
+actor Admin
+
+rectangle "Web Application" {
+  
+  Hunter --> (Авторизация / Приветствие)
+  Hunter --> (Создать заявку)
+  Hunter --> (Просмотр моих заявок)
+  Hunter --> (Статистика и выплаты)
+  Hunter --> (Уведомления)
+
+  Transporter --> (Авторизация / Приветствие)
+  Transporter --> (Просмотр активных заявок)
+  Transporter --> (Принять заявку)
+  Transporter --> (Мои поездки)
+  Transporter --> (Приёмка ханта от клиента)
+  Transporter --> (Доставка на базу)
+  Transporter --> (Выплаты и история)
+  Transporter --> (Уведомления)
+
+  Dealer --> (Авторизация / Приветствие)
+  Dealer --> (Оценка заявок)
+  Dealer --> (Выставление грейда и премии)
+  Dealer --> (Отчётность и контроль)
+  Dealer --> (Уведомления)
+
+  Admin --> (Управление пользователями)
+  Admin --> (Просмотр логов действий)
+  Admin --> (Экспорт отчетов)
+  Admin --> (Мониторинг системы)
+}
+@enduml
