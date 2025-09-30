@@ -3,6 +3,7 @@ import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import "./app.css";
 
 export default function App() {
 
@@ -10,9 +11,6 @@ export default function App() {
     <Router
       root={props => (
         <MetaProvider>
-          <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-          <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-          <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
           <script src="https://cdn.jsdelivr.net/npm/theme-change@2.5.0/index.js"></script>
 
           <Title>SolidStart - Basic</Title>
