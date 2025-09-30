@@ -48,7 +48,7 @@ export default function Home() {
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
               <h3 class="card-title">Todo List</h3>
-              <div class="badge badge-primary mb-4">Total: {todos().length}</div>
+              <div class="badge badge-primary">Total: {todos().length}</div>
 
               <div class="max-h-96 overflow-y-auto bg-base-200 p-4 rounded-lg">
                 <pre class="text-sm leading-relaxed whitespace-pre-wrap">
